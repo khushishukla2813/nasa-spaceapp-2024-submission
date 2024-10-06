@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar with Collapsible Menu and Chat List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 100%;
+            background-color: #075E54;
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1001;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline-block;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #128C7E;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            background-color: #128C7E;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+            margin-right: auto;
+        }
+
+        .back-button:hover {
+            background-color: #0a4f3b;
+        }
+
+        .back-button span {
+            margin-left: 8px;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 20vw;
+            background-color: #075E54;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin-top: 70px; /* To account for the navbar height */
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar h2 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar ul li a {
+            color: rgb(20, 20, 20);
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #128C7E;
+        }
+
+        /* Chat List Section */
+        .chat-list {
+            margin-left: 20vw;
+            width: 80vw;
+            height: 100vh;
+            padding: 2rem;
+            background-color: #ECE5DD;
+            display: flex;
+            flex-direction: column;
+            transition: margin-left 0.3s ease;
+        }
+
+        .chat-list.collapsed {
+            margin-left: 0;
+            width: 100vw;
+        }
+
+        .chat-list h2 {
+            font-size: 1.8rem;
+            color: #075E54;
+            margin-bottom: 1.5rem;
+        }
+
+        .chat-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Spacing between the image and the text */
+        }
+
+        .chat-item strong {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .chat-item p {
+            margin: 0.5rem 0;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        .chat-time {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Profile Picture Styling */
+        .chat-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%; /* Makes the image circular */
+            object-fit: cover; /* Ensures the image is contained within the circle */
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background-color: #075E54;
+            color: white;
+            padding: 1rem;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            z-index: 1001;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 25vw;
+            }
+
+            .chat-list {
+                margin-left: 25vw;
+                width: 75vw;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar {
+                width: 30vw;
+            }
+
+            .chat-list {
+                margin-left: 30vw;
+                width: 70vw;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 60vw;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .chat-list {
+                margin-left: 0;
+                width: 100vw;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="javascript:history.back()" class="back-button">
+            ⬅ <span>Back</span>
+        </a>
+        <h1>Social Platform</h1>
+        <ul>
+            <li><a href="communitysection.html">Post</a></li>
+            <li><a href="chat.html">Chat</a></li>
+            <li><a href="govermentscheme.html">News</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="shopping.html">Shopping</a></li>
+        </ul>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
+    </div>
+
+    <!-- Chat List Section -->
+    <div class="chat-list" id="chatList">
+        <h2>Chats</h2>
+
+        <!-- Chat Item 1 -->
+        <div class="chat-item">
+            <img src="src/image copy 6.png" alt="User 1">
+            <div>
+                <strong>User 1</strong>
+                <p>Hello! How are you?</p>
+                <div class="chat-time">10:45 AM</div>
+            </div>
+        </div>
+
+        <!-- Chat Item 2 -->
+        <div class="chat-item">
+            <img src="src/image copy 6.png" alt="User 2">
+            <div>
+                <strong>User 2</strong>
+                <p>Just harvested my tomatoes!</p>
+                <div class="chat-time">11:15 AM</div>
+            </div>
+        </div>
+
+        <!-- Chat Item 3 -->
+        <div class="chat-item">
+            <img src="src/image copy 6.png" alt="User 3">
+            <div>
+                <strong>User 3</strong>
+                <p>Are you coming to the farm today?</p>
+                <div class="chat-time">1:30 PM</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger" id="hamburger">☰</div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const chatList = document.getElementById('chatList');
+        const hamburger = document.getElementById('hamburger');
+
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            chatList.classList.toggle('collapsed');
+        });
+
+        // Close the sidebar when clicking anywhere outside of it
+        document.addEventListener('click', (event) => {
+            if (!sidebar.contains(event.target) && !hamburger.contains(event.target) && sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                chatList.classList.remove('collapsed');
+            }
+        });
+    </script>
+</body>
+</html>

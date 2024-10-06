@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weather</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Global styles */
+        body {
+            background-color: #181818;
+            color: #ffffff;
+            font-family: 'Nunito Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        h2, h3, h4 {
+            margin: 0 0 10px;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: #222;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .logo img {
+            width: 120px;
+        }
+
+        .search-view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 20px;
+        }
+
+        .search-field {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            padding: 5px 10px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            background-color: #7e57c2;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+        }
+
+        /* Weather section */
+        .weather-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .left-section, .right-section {
+            width: 48%;
+        }
+
+        .weather-card, .forecast-card, .highlights-card, .hourly-forecast-card {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .temperature {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .weather-description, .location, .date {
+            font-size: 18px;
+        }
+
+        .forecast-card ul, .hourly-forecast ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .forecast-card li, .hourly-forecast li {
+            margin: 10px 0;
+            display: flex; /* Use flexbox to align items */
+            align-items: center; /* Center align items */
+        }
+
+        /* Highlights section */
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .highlight-item {
+            background-color: #333;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        /* Weather icon styles */
+        .weather-icon {
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        .weather-icon img {
+            width: 50px; /* Adjust icon size as needed */
+            height: 50px;
+            object-fit: contain;
+        }
+        .weather-icon1 img {
+            width: 200px; /* Adjust icon size as needed */
+            height: 200px;
+            object-fit: contain;
+        }
+
+        /* Flex styling for the weather card */
+        .weather-card {
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Center align items */
+        }
+
+        .weather-details {
+            flex: 1; /* Allow text section to take remaining space */
+        }
+
+        
+/* Back Button Styling */
+.back-button {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            cursor: pointer;
+            color: navy;
+            font-size: 16px;
+        }
+
+        .back-button img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <!-- Back Button -->
+    <div class="back-button" onclick="goBack()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/left.png" alt="Back Arrow" />
+        <span>Back</span>
+    </div>
+
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="assest/images/logo.png" alt="logo">
+            </a>
+            <div class="search-view">
+                <div class="search-wrapper">
+                    <input type="search" class="search-field" placeholder="search city ..." autocomplete="off">
+                    <button class="icon-btn search-btn">
+                        <span class="m-icon">search</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="weather-section container">
+            <!-- Left Section: Current Weather and Forecast -->
+            <div class="left-section">
+                <div class="weather-card">
+                    <div class="weather-details">
+                        <h2>Now</h2>
+                        <p class="temperature" id="temperature">22°C</p>
+                        <p class="weather-description" id="description">Clear Sky</p>
+                        <p class="location" id="location">El Mansura, EG</p>
+                        <p class="date" id="date">Monday 13 Aug</p>
+                    </div>
+                    <div class="weather-icon1">
+                        <img id="weatherIcon" src="assest/images/weather_icons/01n.png" alt="Weather Icon">
+                    </div>
+                </div>
+
+                <div class="forecast-card">
+                    <h3>5 Days Forecast</h3>
+                    <ul id="forecastList">
+                        <li>
+                            <div class="weather-icon">
+                                <img src="assest/images/weather_icons/01n.png" alt="Weather Icon">
+                            </div>
+                            <span>14 Aug - 22°C - Clear</span>
+                        </li>
+                        <li>
+                            <div class="weather-icon">
+                                <img src="assest/images/weather_icons/01n.png" alt="Weather Icon">
+                            </div>
+                            <span>15 Aug - 22°C - Clear</span>
+                        </li>
+                        <li>
+                            <div class="weather-icon">
+                                <img src="assest/images/weather_icons/01n.png" alt="Weather Icon">
+                            </div>
+                            <span>16 Aug - 22°C - Clear</span>
+                        </li>
+                        <li>
+                            <div class="weather-icon">
+                                <img src="assest/images/weather_icons/01n.png" alt="Weather Icon">
+                            </div>
+                            <span>17 Aug - 21°C - Cloudy</span>
+                        </li>
+                        <li>
+                            <div class="weather-icon">
+                                <img src="assest/images/weather_icons/01n.png" alt="Weather Icon">
+                            </div>
+                            <span>18 Aug - 22°C - Clear</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Section: Highlights and Hourly Forecast -->
+            <div class="right-section">
+                <div class="highlights-card">
+                    <h3>Today Highlights</h3>
+                    <div class="highlight-grid">
+                        <div class="highlight-item">
+                            <h4>Air Quality</h4>
+                            <p>Fair</p>
+                            <p>PM2.5: 11.1</p>
+                        </div>
+                        <div class="highlight-item">
+                            <h4>Humidity</h4>
+                            <p>83%</p>
+                        </div>
+                        <div class="highlight-item">
+                            <h4>Pressure</h4>
+                            <p>1009 hba</p>
+                        </div>
+                        <div class="highlight-item">
+                            <h4>Sunrise & Sunset</h4>
+                            <p>6:18 AM - 7:40 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hourly-forecast-card">
+                    <h3>Today's Forecast</h3>
+                    <ul class="hourly-forecast" id="hourlyForecast">
+                        <li>9 AM - 24°C - Sunny</li>
+                        <li>12 PM - 30°C - Sunny</li>
+                        <li>3 PM - 36°C - Sunny</li>
+                        <li>6 PM - 31°C - Cloudy</li>
+                        <li>9 PM - 24°C - Cloudy</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        
+
+        function goBack() {
+            window.history.back();
+        }
+ 
+
+        // Weather condition codes to match with icons
+        const weatherConditions = {
+            "01d": "Clear Sky (Day)",
+            "01n": "Clear Sky (Night)",
+            "02d": "Few Clouds (Day)",
+            "02n": "Few Clouds (Night)",
+            "03d": "Scattered Clouds (Day)",
+            "03n": "Scattered Clouds (Night)",
+            "04d": "Broken Clouds (Day)",
+            "04n": "Broken Clouds (Night)",
+            "09d": "Shower Rain (Day)",
+            "09n": "Shower Rain (Night)",
+            "10d": "Rain (Day)",
+            "10n": "Rain (Night)",
+            "11d": "Thunderstorm (Day)",
+            "11n": "Thunderstorm (Night)",
+            "13d": "Snow (Day)",
+            "13n": "Snow (Night)",
+            "50d": "Mist (Day)"
+        };
+
+        // Example weather data
+        const weatherCode = "01n"; // This will come from your weather API
+        const temperature = "22°C";
+        const location = "El Mansura, EG";
+        const date = "Monday 13 Aug";
+
+        // Update weather information dynamically
+        document.getElementById("weatherIcon").src = `assest/images/weather_icons/${weatherCode}.png`; // Assuming icons are stored in the 'assest/images/weather_icons/' folder
+        document.getElementById("temperature").textContent = temperature;
+        document.getElementById("description").textContent = weatherConditions[weatherCode];
+        document.getElementById("location").textContent = location;
+        document.getElementById("date").textContent = date;
+    </script>
+</body>
+</html>

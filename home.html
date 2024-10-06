@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: aliceblue;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Navbar styling */
+        .user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(245, 245, 245, 0.8);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .user nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .user button {
+            margin-left: 20px;
+            padding: 10px 20px;
+            background-color: navy;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .user button:hover {
+            background-color: darkblue;
+        }
+
+        .body {
+    background-image: url(src/front2.jpg); /* Set the background image */
+   
+    background-size: cover; /* Ensure the image covers the entire area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    padding: 20px; /* Add padding at the sides for spacing */
+    color: white; /* Change text color for better contrast */
+    text-align: justify; /* Center the text */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    border-radius: 10px; /* Optional: rounded corners */
+    margin-top: 60px; /* Adjust margin to create space below the navbar */
+    height: calc(100vh - 60px); /* Fill remaining height after navbar */
+    width: 100%; /* Cover full width */
+
+
+   
+    background-position: center; /* Center the image */
+    padding: 100px 20px; /* Add padding at the top and sides for spacing */
+    color: white; /* Change text color for better contrast */
+    text-align:justify; /* Center the text */
+    /* Optional: Add a semi-transparent background for better readability */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    border-radius: 10px; /* Optional: rounded corners */
+    margin-top: 20px; /* Add margin to create space below the navbar */
+    height:650px;
+    width:1500px;
+}
+
+
+
+        /* About Us Section */
+        .aboutus {
+            display: flex;
+            justify-content: space-around;
+            margin: 80px 0 20px 0;
+        }
+
+        .aboutus div {
+            background-color: navy;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 20%;
+            height: 300px;
+            border-radius: 8px;
+        }
+
+        .aboutus img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* Diagnose Section */
+        .diagnose {
+            display: flex;
+            width: 100%;
+            height: 60vh;
+            padding: 40px 20px;
+            justify-content: space-between;
+            background-color: #f5f5f5;
+            background-image: url(src/now.png);
+        }
+
+        /* Sick Plant Section (Phone Structure) */
+        .sickplant {
+            background-color: #031b37;
+            color: white;
+            width: 30%;
+            height: 100%;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        
+
+        .sickplant h2 {
+            color: red;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .sickplant img {
+            width: 100px;
+            height: 200px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .sickplant p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sickplant button {
+            padding: 10px 20px;
+            background-color: darkred;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .sickplant button:hover {
+            background-color: crimson;
+        }
+
+        /* Arrow pointing to Cure button */
+        .arrow {
+            position: absolute;
+            left: 120px;
+            top: 250px;
+            width: 100px;
+            height: 10px;
+            background-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+
+        .arrow:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: white;
+        }
+
+        .arrow:after {
+            content: '';
+            position: absolute;
+            top: -14px;
+            left: 80px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid white;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        /* Para Div */
+        .para {
+            width: 65%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .para p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .para button {
+            padding: 10px 20px;
+            background-color: navy;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        .para button:hover {
+            background-color: darkblue;
+        }
+
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .aboutus {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .aboutus div {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+
+            .diagnose {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .sickplant {
+                width: 100%;
+                height: auto;
+                margin-bottom: 20px;
+            }
+
+            .para {
+                width: 100%;
+            }
+
+            .plantDoctor img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+
+        .plantDoctor {
+        text-align: center;
+        margin: 40px 0; /* Adds margin for spacing */
+    }
+
+    .plantDoctor h1 {
+        font-size: 24px; /* Adjust font size for heading */
+        margin-bottom: 20px; /* Space below heading */
+        color: rgb(2, 2, 18); /* Text color */
+    }
+
+    .upload {
+        display: flex; /* Align items horizontally */
+        justify-content: center;
+        align-items: center; /* Center vertically */
+        gap: 20px; /* Space between dashed box and images */
+    }
+
+    .upload-box {
+        width: 200px; /* Increased width for upload box */
+        height: 200px; /* Increased height for upload box */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Center content */
+        border: 2px dashed rgb(2, 2, 18); /* Dashed border for upload box */
+        overflow: hidden; /* Hide overflow for images */
+    }
+
+    .upload img {
+        max-width: 70%; /* Responsive image size for upload icon */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .upload p {
+        margin-top: 5px; /* Space above text */
+        color: rgb(2, 2, 18); /* Text color */
+        font-size: 14px; /* Text size */
+        text-align: center; /* Center text */
+    }
+
+    .image-gallery {
+        display: flex;
+        gap: 10px; /* Space between images */
+    }
+
+    .image-gallery img {
+        width: 150px; /* Set width for gallery images */
+        height: 150px; /* Set height for gallery images */
+        object-fit: cover; /* Maintain aspect ratio and fill the box */
+        border: 2px solid rgb(2, 2, 18); /* Optional border around images */
+        border-radius: 5px; /* Optional rounded corners for images */
+    }
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="user">
+       <a href="login.html"> <button>Login</button></a>
+        <nav>
+            <a href=".aboutus"><button>HelpDesk</button></a>
+            <a href="settings.html"><button>User</button></a>
+        </nav>
+    </div>
+
+    <div class="body">
+        <h1>FarmTech</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quam magni modi incidunt alias, neque iusto quod facere veritatis aspernatur.</p>
+        <a href="signup.html"><button type="button">Register Now</button></a>
+        
+    </div>
+
+    <!-- About Us Section -->
+    <div class="aboutus">
+        <div class="weather">
+            <img src="src/weather.jpg" alt="Weather Icon">
+            <p>Stay informed with timely weather alerts to help protect your crops from regional climate risks</p>
+            <a href="weather_modified.html"><button type="submit">Click Here</button></a>
+        </div>
+        <div class="Crop">
+            <img src="src/crop.jpg" alt="Crop Icon">
+            <p>Upload Image & get instant pest/disease analysis</p>
+            <a href="diseasePredict.html"><button type="submit">Click Here</button></a>
+        </div>
+        <div class="Updates">
+            <img src="src/updates.jpg" alt="Updates Icon">
+            <p>Keep track of essential farming information with daily updates to optimize your agricultural practices
+            </p>
+            <a href="govermentscheme.html"><button type="submit">Click Here</button></a>
+        </div>
+        <div class="Community">
+            <img src="src/community.jpg" alt="Community Icon">
+            <p>Connect with local farmers through our community feature to share knowledge and grow together</p>
+            <a href="communitysection.html"><button type="submit">Click Here</button></a>
+        </div>
+    </div>
+
+    <!-- Diagnose Section -->
+    <div class="diagnose">
+        <!-- Sick Plant Section -->
+        <div class="sickplant">
+            <h2>Sick Plant</h2>
+            <img src="src/sickplant.png" alt="Sick Plant">
+            <p>Peace Lily</p>
+            <a href="diseasePredict.html"><button>Cure</button></a>
+
+            <!-- Arrow pointing from image to Cure button -->
+            <div class="arrow"></div>
+        </div>
+
+        <!-- Para Section -->
+        <div class="para">
+            <p><span>Identify and cure plant diseases with FarmTech</span> Is your green buddy dying? Try FarmTech to
+                identify the cause and get extensive disease and care info in a snap.</p>
+            <button type="submit">Diagnose</button>
+        </div>
+    </div>
+
+    <!-- Plant Doctor Section -->
+    <div class="plantDoctor">
+        <h1>Your Personal Plant Doctor</h1>
+        <div class="upload">
+            <div class="upload-box">
+               <a href="diseasePredict.html"> <img src="src/crop.jpg" alt="Upload Icon"></a>
+                <p>Click/Upload Photo</p>
+            </div>
+            <div class="image-gallery">
+                <img src="src/img1.jpg" alt="Plant Image 1">
+                <img src="src/img2.jpg" alt="Plant Image 2">
+                <img src="src/img3.jpg" alt="Plant Image 3">
+                <img src="src/img4.jpg" alt="Plant Image 4">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> 

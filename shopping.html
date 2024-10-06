@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizers and Crops - FarmTech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #002d38;
+            color: white;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #002d38;
+            border-radius: 5px;
+        }
+
+        .navbar button {
+            padding: 10px 20px;
+            background-color: #fff;
+            color:#002d38;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar button:hover {
+            background-color: #ddd;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            cursor: pointer;
+            color:#002d38;
+            font-size: 16px;
+        }
+
+        .back-button img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        /* Category Section */
+        .category {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .category div {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 0 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .category div:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .product-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-card button {
+            padding: 10px;
+            background-color: #002d38;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-card button:hover {
+            background-color: #002d38;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #002d38;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .category {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category div {
+                margin-bottom: 20px;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar ul li {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>FarmTech</h1>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="communitysection.html">Community Post</a></li>
+            <li><a href="chat.html">Chat</a></li>
+            <li><a href="govermentscheme.html">Govt. Schemes</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+        <button>Login</button>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button" onclick="goBack()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/left.png" alt="Back Arrow" />
+        <span>Back</span>
+    </div>
+
+    <!-- Category Section -->
+    <div class="category">
+        <div>Fertilizers</div>
+        <div>Seeds</div>
+        <div>Tools</div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+        <!-- Product Cards -->
+        <!-- Product Card 1 -->
+        <div class="product-card">
+            <img src="src/image.png" alt="Fertilizer 1">
+            <h3>Organic Fertilizer</h3>
+            <p>Price: Rs.10.99</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="product-card">
+            <img src="src/image copy.png" alt="Fertilizer 2">
+            <h3>Slow Release Fertilizer</h3>
+            <p>Price: Rs.12.99</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card">
+            <img src="src/image copy 2.png" alt="Tomato Seeds">
+            <h3>Tomato Seeds</h3>
+            <p>Price: Rs.5.99</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="product-card">
+            <img src="src/image copy 3.png" alt="Carrot Seeds">
+            <h3>Carrot Seeds</h3>
+            <p>Price: Rs.4.99</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Product Card 5 -->
+        <div class="product-card">
+            <img src="src/image copy 4.png" alt="Liquid Fertilizer">
+            <h3>Liquid Fertilizer</h3>
+            <p>Price: Rs.9.99</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <!-- Product Card 6 -->
+        <div class="product-card">
+            <img src="src/image copy 5.png" alt="Fruit">
+            <h3>Fruit care</h3>
+            <p>Price: Rs.7.99</p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+
+</html>

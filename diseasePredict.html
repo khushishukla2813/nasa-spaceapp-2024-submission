@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Predictor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            background-color: #044707; /* Dark Green */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav .logo {
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #4CAF50; /* Dark Green */
+        }
+
+        nav ul li a::after {
+            content: "";
+            display: block;
+            height: 2px;
+            width: 0;
+            background: white;
+            transition: width 0.3s;
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero {
+            background-image: url('src/front.jpg'); /* Example placeholder */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .hero button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #45a049; /* Lighter green */
+        }
+
+        .how-it-works, .features, .testimonials {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .how-it-works h2, .features h2, .testimonials h2 {
+            margin-bottom: 20px;
+        }
+
+        .step {
+            margin: 40px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        /* Styles for image upload section */
+        .upload-section {
+            margin: 40px auto;
+            text-align: center;
+        }
+
+        .upload-section input[type="file"] {
+            display: none; /* Hide default file input */
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            transition: background-color 0.3s;
+            color: black; /* Set text color to black */
+        }
+
+        .custom-file-upload:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Image preview styles */
+        .image-preview {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid green;
+            border-radius: 5px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Server response styles */
+        .server-response {
+            margin-top: 20px;
+            font-weight: bold;
+            color: green; /* You can change the color if you prefer */
+            text-align: center;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+            cursor: pointer;
+            color: navy;
+            font-size: 16px;
+        }
+
+        .back-button img {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <!-- Back Button -->
+    <div class="back-button" onclick="goBack()">
+        <img src="https://img.icons8.com/ios-filled/50/000000/left.png" alt="Back Arrow" />
+        <span>Back</span>
+    </div>
+
+
+        <div class="logo">Plant Disease Predictor</div>
+        <ul>
+            <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            <li><a href="signup.html"><i class="fas fa-user-plus"></i> Register</a></li>
+            <li><a href="helpdesk"><i class="fas fa-life-ring"></i> Helpdesk</a></li>
+            <li><a href="http://127.0.0.1:8080/#/approximatelocation"><i class="fas fa-cloud-sun"></i> Weather</a></li>
+            <li><a href="govermentscheme.html"><i class="fas fa-gov"></i> Govt Scheme</a></li>
+            <li><a href="communitysection.html"><i class="fas fa-users"></i> Community</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Protect Your Plants: Diagnose Diseases Instantly!</h1>
+        <p>Upload a photo and let our AI-powered tool identify plant diseases.</p>
+        <div class="upload-section">
+            <label class="custom-file-upload">
+                <input type="file" id="image-input" accept="image/*" onchange="showImagePreview()">
+                Add Image
+            </label>
+            <button onclick="uploadImage()">Predict</button>
+        </div>
+        <div class="image-preview" id="image-preview">
+            <h3>Image Preview:</h3>
+            <img id="preview-img" src="" alt="Image Preview">
+        </div>
+        <div id="serverResponse" class="server-response"></div> <!-- Server response section -->
+    </div>
+
+    <div class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="step">
+            <h3>Step 1: Upload Your Plant Photo</h3>
+            <p>Simply take a clear picture of your plant leaves and upload it.</p>
+        </div>
+        <div class="step">
+            <h3>Step 2: Instant Diagnosis</h3>
+            <p>Our advanced AI analyzes the image and identifies potential diseases.</p>
+        </div>
+        <div class="step">
+            <h3>Step 3: Get Recommendations</h3>
+            <p>Receive actionable insights and treatment options for your plant.</p>
+        </div>
+    </div>
+
+    <div class="features">
+        <h2>Features</h2>
+        <ul>
+            <li>Fast and accurate disease identification</li>
+            <li>User-friendly interface</li>
+            <li>Community support and expert advice</li>
+        </ul>
+    </div>
+
+    <div class="testimonials">
+        <h2>What Our Users Say</h2>
+        <p>"This tool saved my garden!" - A Happy User</p>
+        <p>"I love how easy it is to use." - Another Happy User</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Plant Disease Predictor. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal for server response -->
+    <div id="responseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Server Response</h2>
+            <p id="responseText"></p>
+        </div>
+    </div>
+
+    <script>
+         function goBack() {
+            window.history.back();
+        }
+        function showImagePreview() {
+            const fileInput = document.getElementById('image-input');
+            const previewContainer = document.getElementById('image-preview');
+            const previewImage = document.getElementById('preview-img');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImage.src = event.target.result;
+                    previewContainer.style.display = 'block'; // Show the preview
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none'; // Hide the preview if no file is selected
+            }
+        }
+
+        function uploadImage() {
+            const fileInput = document.getElementById('image-input');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Please select an image file first.");
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const base64String = reader.result.replace('data:', '').replace(/^.+,/, '');
+                sendImageToServer(base64String);
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function sendImageToServer(base64String) {
+            fetch('http://127.0.0.1:8000/api/predict/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: base64String })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })   
+            .then(data => { 
+                console.log('Success:', data);
+                showModal(data);
+                showServerResponse(data);
+            })       
+            .catch(error => { 
+                console.error('Error:', error);
+                alert("An error occurred while processing the image.");
+            });
+        }
+
+        function showModal(data) {
+            document.getElementById('responseText').innerText = JSON.stringify(data);
+            document.getElementById('responseModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('responseModal').style.display = "none";
+        }
+
+        function showServerResponse(data) {
+            document.getElementById('serverResponse').innerText = JSON.stringify(data);
+        }
+
+        
+    </script>
+</body>
+</html>

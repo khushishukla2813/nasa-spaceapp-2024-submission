@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings Page</title>
+    <style> 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #075E54;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar h1 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: white;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content Layout */
+        .container {
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        /* New Settings Styling */
+        .settings-section {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .settings-section img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .settings-section label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #075E54;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .save-button {
+            background-color: #075E54;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .save-button:hover {
+            background-color: #064c43;
+        }
+
+        /* Profile Picture Upload Styling */
+        .profile-picture {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #upload-photo {
+            display: none;
+        }
+
+        .upload-label {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #4267B2;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .upload-label:hover {
+            background-color: #365899;
+        }
+
+        /* Back Button Styling */
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #888;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-button:hover {
+            background-color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .post-section,
+            .settings-section {
+                width: 100%;
+                padding: 15px;
+                margin: 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Social Platform</h1>
+        <ul>
+            <li><a href="post.html">Post</a></li>
+            <li><a href="chatlist.html">Chat</a></li>
+            <li><a href="govermentscheme.html">News</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="shopping.html">Shopping</a></li>
+            
+        </ul>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="settings-section">
+        <h2>Settings</h2>
+        <p>Manage your account settings and preferences below:</p>
+
+        <!-- Profile Picture Upload -->
+        <div class="profile-picture">
+            <h3>Profile Picture</h3>
+            <img src="src/image copy 6.png" alt="Profile Picture" id="profile-pic">
+            <label for="upload-photo" class="upload-label">Upload New Photo</label>
+            <input type="file" accept="image/*" id="upload-photo">
+        </div>
+
+        <!-- Personal Information -->
+        <h3>Personal Information</h3>
+        <label for="email">Email</label>
+        <input type="email" id="email" class="input-field" placeholder="Update email">
+
+        <label for="name">Full Name</label>
+        <input type="text" id="name" class="input-field" placeholder="Update full name">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" class="input-field" placeholder="Update phone number">
+
+        <!-- Notification Preferences -->
+        <h3>Notification Preferences</h3>
+        <label>
+            <input type="checkbox" id="email-notifications"> Email Notifications
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" id="sms-notifications"> SMS Notifications
+        </label>
+
+        <!-- Save and Back Buttons -->
+        <button class="save-button">Save Changes</button>
+        <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
